@@ -38,6 +38,8 @@ tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eight
 
 scales = ["hundred", "thousand", "million", "billion", "trillion"]
 
+#Provide input in text("here")
+
 text="seven billion one hundred million thirty one thousand three hundred thirty seven pound"
 a=text.split(" ")
 f=0
