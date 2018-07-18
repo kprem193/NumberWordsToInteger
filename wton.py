@@ -28,31 +28,44 @@ def text2int(textnum, numwords={}):
 
     return result + current
 
-units = [
+check = [
         "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
         "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-        "sixteen", "seventeen", "eighteen", "nineteen",
+        "sixteen", "seventeen", "eighteen", "nineteen","twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety","hundred", "thousand", "million", "billion", "trillion"
       ]
 
-tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+text="seven hundred twenty three pound twenty three cents"
 
-scales = ["hundred", "thousand", "million", "billion", "trillion"]
-
-#Provide input in text("here")
-
-text="seven billion one hundred million thirty one thousand three hundred thirty seven pound"
 a=text.split(" ")
+f1=0
+j=1
+
+if(a[-1]=="cent" or a[-1]=="cents"):
+  f1=1
+  text=text[:len(text)-(len(a[-1])+1)]
+  for i in check:
+    if(i==a[-3]):
+      j=2
+      break
+    if(i==a[-4]):
+      j=1
+      break
+  if(j==2):
+    text1=a[-3]+" "+a[-2]
+    text=text[:len(text)-(len(a[-2])+len(a[-3])+1)]
+  if(j==1):
+    text1=a[-2]
+    text=text[:len(text)-(len(a[-2])+1)]
+
 f=0
-for i in units:
+for i in check:
   if(i==a[-1]):
     f=1
-for i in tens:
-  if(i==a[-1]):
-    f=1
-for i in scales:
-  if(i==a[-1]):
-    f=1
+
 if(f!=1):
   text=text[:len(text)-(len(a[-1])+1)]
-#print(text)
-print text2int(text)
+if(f1!=1):
+  print text2int(text)
+else:
+  final= str(text2int(text))+"."+str(text2int(text1))
+  print(final)
