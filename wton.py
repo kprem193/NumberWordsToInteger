@@ -34,7 +34,7 @@ check = [
         "sixteen", "seventeen", "eighteen", "nineteen","twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety","hundred", "thousand", "million", "billion", "trillion"
       ]
 
-text="seven hundred twenty three pound twenty three cents"
+text="seven hundred twenty three euro twenty three cent"
 
 a=text.split(" ")
 f1=0
@@ -47,9 +47,7 @@ if(a[-1]=="cent" or a[-1]=="cents"):
     if(i==a[-3]):
       j=2
       break
-    if(i==a[-4]):
-      j=1
-      break
+
   if(j==2):
     text1=a[-3]+" "+a[-2]
     text=text[:len(text)-(len(a[-2])+len(a[-3])+1)]
@@ -57,6 +55,8 @@ if(a[-1]=="cent" or a[-1]=="cents"):
     text1=a[-2]
     text=text[:len(text)-(len(a[-2])+1)]
 
+text=text[:len(text)-1]
+a=text.split(" ")
 f=0
 for i in check:
   if(i==a[-1]):
@@ -64,8 +64,15 @@ for i in check:
 
 if(f!=1):
   text=text[:len(text)-(len(a[-1])+1)]
+  if(a[-1]=="dollar" or a[-1]=="dollars"):
+    currency="$"
+  if(a[-1]=="euro" or a[-1]=="euros"):
+    currency = u"\u20ac"
+  if(a[-1]=="pound" or a[-1]=="pounds"):
+    currency=u"\u00A3"
+
 if(f1!=1):
   print text2int(text)
 else:
-  final= str(text2int(text))+"."+str(text2int(text1))
+  final= str(text2int(text))+"."+str(text2int(text1))+currency
   print(final)
